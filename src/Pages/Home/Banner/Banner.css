@@ -1,0 +1,6 @@
+.hero {
+    background-image: url(../../../assets/images/bg.png);
+    background-size: cover;
+    background-position: center;
+    background-color: #ddd;
+}
