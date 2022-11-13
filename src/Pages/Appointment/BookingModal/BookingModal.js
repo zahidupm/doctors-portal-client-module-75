@@ -1,9 +1,34 @@
 import { format } from 'date-fns';
 import React from 'react';
 
-const BookingModal = ({treatment, selectedDate}) => {
+const BookingModal = ({treatment, selectedDate, setTreatment}) => {
     const {name, slots} = treatment; // treatment is appointment options just different name
-    const date = format(selectedDate, 'PP')
+    const date = format(selectedDate, 'PP');
+
+    const handleBooking = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const slot = form.slot.value;
+        const name = form.name.value;
+        const email = form.email.value;
+        const phone = form.phone.value;
+        const booking = {
+            appointmentDate: date,
+            treatment: name,
+            patient: name,
+            slot,
+            email,
+            phone
+        }
+
+        // TODO: send data to the server
+        // and once data is saved then close the modal
+        // and display success toast
+
+        console.log(booking);
+        setTreatment(null)
+    }
+
     return (
         <>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -11,17 +36,20 @@ const BookingModal = ({treatment, selectedDate}) => {
                 <div className="modal-box relative">
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg font-bold">{name}</h3>
-                    <form className='grid grid-cols-1 gap-3 mt-6'>
+                    <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 mt-6'>
                     <input type="text" value={date} disabled className="input input-bordered w-full" />
-                    <select className="select select-info w-full">
+                    <select name='slot' className="select select-info w-full">
                         {
-                            slots.map(slot => <option value={slot}>{slot}</option>)
+                            slots.map((slot, i) => <option 
+                                value={slot}
+                                key={i}
+                                >{slot}</option>)
                         }
                     </select>
-                    <input type="text" placeholder="Type here" className="input input-bordered w-full" />
-                    <input type="text" placeholder="Type here" className="input input-bordered w-full" />
-                    <input type="text" placeholder="Type here" className="input input-bordered w-full" />
-                    <input type="submit" className='w-full max-w-xs' name="" id="" value='Submit' />
+                    <input name='name' type="text" placeholder="Your Name" className="input input-bordered w-full" />
+                    <input name='email' type="email" placeholder="Email Address" className="input input-bordered w-full" />
+                    <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" />
+                    <input type="submit" className='w-full btn btn-primary' name="" id="" value='Submit' />
                     </form>
                 </div>
             </div>   
