@@ -3,16 +3,16 @@ import AppointmentBanner from '../AppointmentBanner/AppointmentBanner';
 import AvailableAppointments from '../AvailableAppointment/AvailableAppointment';
 
 const Appointment = () => {
-    const [selectedDate, setSelectedData] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
     return (
         <div className=''>
            <AppointmentBanner 
            selectedDate={selectedDate}
-           setSelectedData={setSelectedData}
+           setSelectedDate={setSelectedDate}
            ></AppointmentBanner>
            <AvailableAppointments
            selectedDate={selectedDate}
-           setSelectedData={setSelectedData}
+           setSelectedDate={setSelectedDate}
            ></AvailableAppointments>
         </div>
     );
