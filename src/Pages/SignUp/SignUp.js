@@ -33,10 +33,12 @@ const SignUp = () => {
                         <label className="label">
                             <span className="label-text-alt">Password</span>
                         </label>
-                        <input type='password' {...register("password", {required: "Password is required", minLength: {value: 6, message: 'Password must be at least 6 character'}})} className="input input-bordered w-full" placeholder="" />
+                        <input type='password' {...register("password", {required: "Password is required", minLength: {value: 6, message: 'Password must be at least 6 character'}, 
+                        pattern: {value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: "Password must be strong"}
+                    })} className="input input-bordered w-full" placeholder="" />
                         {errors.password && <p className='text-red-600'>{errors?.password.message}</p>}
                     </div>
-                    <input className='btn btn-accent w-full' value="Sign Up" type="submit" />
+                    <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
                 </form>
                 <p>Already have an account <Link className='text-secondary' to='/login'>Page Login</Link></p>
                 <div className="divider">OR</div>
