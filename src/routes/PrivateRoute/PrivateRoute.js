@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth.context';
 
-const PrivateRoute = ({Children}) => {
+const PrivateRoute = ({children}) => {
     const {user, loading} = useContext(AuthContext);
     const location = useLocation();
 
@@ -10,8 +10,8 @@ const PrivateRoute = ({Children}) => {
         return <progress className="progress w-56"></progress>
     }
 
-    if(user) {
-        return Children;
+    if(user && user.uid) {
+        return children;
     }
 
     return <Navigate to='/login' state={{from: location}} replace></Navigate>;
