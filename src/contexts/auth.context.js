@@ -28,15 +28,23 @@ const AuthProvider = ({children}) => {
         return signOut(auth);
     }
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    // useEffect(() => {
+    //     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    //         console.log('user observing');
+    //         setUser(currentUser);
+    //         setLoading(false);
+    //     });
+    //     return () => unsubscribe();
+    // }, [])
+
+    useEffect( () =>{
+        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
             console.log('user observing');
             setUser(currentUser);
             setLoading(false);
         });
-        return () => {
-            unsubscribe();
-        }
+
+        return () => unsubscribe();
     }, [])
 
     const authInfo = {
